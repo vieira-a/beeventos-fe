@@ -11,17 +11,15 @@ export class LoginService {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error("Falha na tentativa de login");
-      } else {
-        console.log(data.message);
+      if (!response) {
+        throw new Error("Erro na tentativa de login");
       }
+
+      const data = await response.json();
 
       return data;
     } catch (error) {
-      throw new Error("Erro ao fazer login: " + error);
+      throw new Error("Erro na tentativa de login: " + error);
     }
   }
 }

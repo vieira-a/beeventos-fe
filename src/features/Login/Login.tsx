@@ -8,7 +8,7 @@ export const Login = () => {
         <img src={logo} alt="Logo Beeventos" className='w-[50%] m-auto' />
         <h2>Login</h2>
       </div>
-      <div className="bg-primary-foreground">
+      <div>
         <LoginForm />
       </div>
     </section>

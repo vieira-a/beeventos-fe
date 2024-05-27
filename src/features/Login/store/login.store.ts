@@ -6,6 +6,7 @@ import useSessionStore from "./session.store";
 interface LoginState {
   email: string;
   password: string;
+  errorMessage: string;
   login: (email: string, password: string) => void;
   logout: () => void;
 }
@@ -13,18 +14,20 @@ interface LoginState {
 const useLoginStore = create<LoginState>((set) => ({
   email: "",
   password: "",
+  errorMessage: "",
 
   login: async (email, password) => {
     const loginService = new LoginService();
     set({ email, password });
 
     const data = await loginService.userLogin(email, password);
-    console.log(data);
 
     if (data?.access_token) {
       useSessionStore.getState().setAccessToken(data?.access_token);
+      set({ errorMessage: "" });
     } else {
-      throw new Error("Houve uma falha ao receber o token de acesso");
+      set({ errorMessage: data.message });
+      throw new Error(data.message);
     }
   },
 
