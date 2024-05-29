@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface SessionStore {
   access_token: string;
@@ -10,12 +10,12 @@ interface SessionStore {
 }
 
 const useSessionStore = create<SessionStore>((set) => ({
-  access_token: localStorage.getItem("access_token") || "",
-  isLogged: !!localStorage.getItem("access_token"),
-  userRole: "",
+  access_token: localStorage.getItem('access_token') || '',
+  isLogged: !!localStorage.getItem('access_token'),
+  userRole: '',
 
   setAccessToken: (token) => {
-    localStorage.setItem("access_token", token);
+    localStorage.setItem('access_token', token);
     set((state) => ({ ...state, access_token: token, isLogged: true }));
   },
 
@@ -24,12 +24,12 @@ const useSessionStore = create<SessionStore>((set) => ({
   },
 
   clearAccessToken: () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem('access_token');
     set((state) => ({
       ...state,
-      access_token: "",
+      access_token: '',
       isLogged: false,
-      userRole: "",
+      userRole: '',
     }));
   },
 }));

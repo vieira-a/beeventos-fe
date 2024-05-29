@@ -1,7 +1,20 @@
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
@@ -9,12 +22,12 @@ import { LoginSchema, LoginSchemaType } from '../schema/login.schema';
 import useLoginStore from '../store/login.store';
 
 export function LoginForm() {
-  const login = useLoginStore(state => state.login);
-  const errorMessage = useLoginStore(state => state.errorMessage);
+  const login = useLoginStore((state) => state.login);
+  const errorMessage = useLoginStore((state) => state.errorMessage);
 
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(LoginSchema),
-  })
+  });
 
   function onSubmit(data: LoginSchemaType) {
     login(data.email, data.password, data.loginRole);
@@ -22,16 +35,19 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
-      <FormField
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-6"
+      >
+        <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>E-mail</FormLabel>
-              <Input 
-                type='email' 
-                placeholder='Entre com o seu e-mail'
+              <Input
+                type="email"
+                placeholder="Entre com o seu e-mail"
                 onChange={field.onChange}
               />
             </FormItem>
@@ -43,9 +59,9 @@ export function LoginForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Senha</FormLabel>
-              <Input 
-                type='password' 
-                placeholder='Entre com a sua senha'
+              <Input
+                type="password"
+                placeholder="Entre com a sua senha"
                 onChange={field.onChange}
               />
             </FormItem>
@@ -71,11 +87,11 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <Button className='bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full'>Entrar</Button>
-        <FormMessage className='text-center'>
-          {errorMessage}
-        </FormMessage>
+        <Button className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full">
+          Entrar
+        </Button>
+        <FormMessage className="text-center">{errorMessage}</FormMessage>
       </form>
     </Form>
-  )
+  );
 }

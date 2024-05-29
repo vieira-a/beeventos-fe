@@ -1,7 +1,7 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-import { LoginService } from "../services/login.service";
-import useSessionStore from "./session.store";
+import { LoginService } from '../services/login.service';
+import useSessionStore from './session.store';
 
 interface LoginState {
   email: string;
@@ -14,10 +14,10 @@ interface LoginState {
 }
 
 const useLoginStore = create<LoginState>((set) => ({
-  email: "",
-  password: "",
-  loginRole: "",
-  errorMessage: "",
+  email: '',
+  password: '',
+  loginRole: '',
+  errorMessage: '',
 
   setLoginRole: async (selectedRole: string) => {
     set((state) => ({ ...state, loginRole: selectedRole }));
@@ -32,7 +32,7 @@ const useLoginStore = create<LoginState>((set) => ({
     if (data?.access_token) {
       useSessionStore.getState().setAccessToken(data?.access_token);
 
-      set({ errorMessage: "" });
+      set({ errorMessage: '' });
     } else {
       set({ errorMessage: data.message });
       throw new Error(data.message);
