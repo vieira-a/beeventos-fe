@@ -1,56 +1,81 @@
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { LoginSchema, LoginSchemaType } from '../schema/login.schema';
 import useLoginStore from '../store/login.store';
 
-export const LoginForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginSchemaType>({
-    resolver: zodResolver(LoginSchema)
-  });
-
+export function LoginForm() {
   const login = useLoginStore(state => state.login);
   const errorMessage = useLoginStore(state => state.errorMessage);
 
-  const onSubmit = (data: LoginSchemaType) => {
-    login(data.email, data.password);
-  };
+  const form = useForm<LoginSchemaType>({
+    resolver: zodResolver(LoginSchema),
+  })
+
+  function onSubmit(data: LoginSchemaType) {
+    login(data.email, data.password, data.loginRole);
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
-      <div className='flex flex-col gap-2'>
-        <label htmlFor="email" className='text-sm font-medium'>E-mail</label>
-        <Input 
-          id='email' 
-          type='email' 
-          placeholder='Entre com o seu e-mail'
-          {...register("email", { required: "E-mail é obrigatório" })}
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>E-mail</FormLabel>
+              <Input 
+                type='email' 
+                placeholder='Entre com o seu e-mail'
+                onChange={field.onChange}
+              />
+            </FormItem>
+          )}
         />
-      </div>
-      <div className='flex flex-col gap-2'>
-        <label htmlFor="password" className='text-sm font-medium'>Senha</label>
-        <Input 
-          id='password' 
-          type='password' 
-          placeholder='Entre com a sua senha'
-          {...register("password", { required: "Senha é obrigatória" })}
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Senha</FormLabel>
+              <Input 
+                type='password' 
+                placeholder='Entre com a sua senha'
+                onChange={field.onChange}
+              />
+            </FormItem>
+          )}
         />
-      </div>
-      <p className='text-xs text-center'>Não possui conta? Registre-se <a href="#">aqui</a></p>
-      <Button className='bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full'>Entrar</Button>
-      <div>
-        {errors && errorMessage && (
-          <Alert
-            variant="destructive"
-          >
-            <AlertTitle>Erro na tentativa de login:</AlertTitle>
-            <AlertDescription>{errorMessage}</AlertDescription>
-          </Alert>
-        )}
-      </div>
-    </form>
-  );
-};
+        <FormField
+          control={form.control}
+          name="loginRole"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Perfil</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione um perfil de usuário" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="user">Organizador</SelectItem>
+                  <SelectItem value="atendee">Participante</SelectItem>
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+        <Button className='bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full'>Entrar</Button>
+        <FormMessage className='text-center'>
+          {errorMessage}
+        </FormMessage>
+      </form>
+    </Form>
+  )
+}
