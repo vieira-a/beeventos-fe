@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 import { EventService } from '../services/event.service';
-import { EventsResult, EventsState } from '../types/events-types';
+import { EventsResult, EventsState } from '../types/events.types';
 
 const eventService = new EventService();
 

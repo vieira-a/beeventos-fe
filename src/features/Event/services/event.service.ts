@@ -1,6 +1,6 @@
 import { API_URLS } from '@/common/constans/api-urls';
 
-import { EventsResult } from '../types/events-types';
+import { EventsResult } from '../types/events.types';
 
 export class EventService {
   async readAllEvents(): Promise<EventsResult> {
