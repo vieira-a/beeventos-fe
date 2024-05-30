@@ -7,7 +7,7 @@ import { PrivateRoutes } from './routers/PrivateRoutes';
 
 function App() {
   return (
-    <main className="w-full h-full p-4">
+    <main className="w-full h-full p-8">
       <Router>
         <Routes>
           <Route element={<PrivateRoutes />}>

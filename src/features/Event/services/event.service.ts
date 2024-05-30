@@ -1,26 +1,35 @@
 import { API_URLS } from '@/common/constans/api-urls';
 
-import { EventsResult } from '../types/events.types';
+import { EventFilterOptions } from '../types/filter-options.types';
 
 export class EventService {
-  async readAllEvents(): Promise<EventsResult> {
+  async readAllEvents(filterOptions?: EventFilterOptions) {
+    let url = API_URLS.EVENTS;
+
+    if (filterOptions?.title) {
+      url += `?title=${encodeURIComponent(filterOptions.title)}`;
+    }
+
     try {
-      const response = await fetch(API_URLS.EVENTS, {
+      const response = await fetch(url.toString(), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      if (!response) {
-        throw new Error('Erro na tentativa de obter eventos');
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       const data = await response.json();
 
+      if (!data && !data.result) {
+        return;
+      }
       return data.result;
     } catch (error) {
-      throw new Error('Erro ao obter dados de eventos: ' + error);
+      return;
     }
   }
 }

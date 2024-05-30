@@ -1,5 +1,7 @@
 import { PageMeta } from '@/common/types/pagination';
 
+import { EventFilterOptions } from './filter-options.types';
+
 export type Event = {
   id: string;
   eventType: string;
@@ -22,10 +24,6 @@ export type EventsResult = {
 
 export type EventsState = {
   result: EventsResult;
-  readAllEvents: () => void;
+  filterOptions: EventFilterOptions;
+  readAllEvents: (filterOptions: EventFilterOptions) => void;
 };
-
-// export type EventsState = {
-//   result: any;
-//   readAllEvents: () => void;
-// };
