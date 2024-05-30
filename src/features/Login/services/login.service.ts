@@ -1,14 +1,11 @@
 export class LoginService {
   async userLogin(email: string, password: string, loginRole: string) {
-    console.log('chega no login', loginRole);
     let loginUserUrl: string | undefined;
 
     if (loginRole === 'user') {
       loginUserUrl = process.env.API_LOGIN_USER_URL;
-      console.log('loginUserUrl > user? ', loginUserUrl);
     } else if (loginRole === 'atendee') {
       loginUserUrl = process.env.API_LOGIN_ATENDEE_URL;
-      console.log('loginUserUrl > atendee?: ', loginUserUrl);
     }
 
     try {
