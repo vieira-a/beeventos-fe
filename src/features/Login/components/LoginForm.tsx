@@ -1,22 +1,10 @@
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 import { LoginSchema, LoginSchemaType } from '../schema/login.schema';
 import useLoginStore from '../store/login.store';
@@ -87,6 +75,7 @@ export function LoginForm() {
             </FormItem>
           )}
         />
+        <p className='text-sm text-center'>Ainda não tem conta? Registre-se <Link to={"/register"}><span className=' text-yellow-600 underline decoration-bouble'>aqui</span></Link></p>
         <Button className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full">
           Entrar
         </Button>
