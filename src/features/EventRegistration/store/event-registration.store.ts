@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 
+import { EventRegistrationService } from '../services';
 import {
   EventRegistration,
   initialEventRegistration,
-} from '../@types/event-registration.types';
-import { EventRegistrationService } from '../services';
+} from '../types/event-registration.types';
 
 const useEventRegistrationStore = create<EventRegistration>((set) => ({
   statusCode: 0,

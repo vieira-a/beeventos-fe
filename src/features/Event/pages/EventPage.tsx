@@ -6,7 +6,7 @@ import useSessionStore from '@/features/Login/store/session.store';
 import useGetUserProfile from '@/hooks/useGetUserProfile';
 import { useEffect, useState } from 'react';
 import { CiClock2, CiLocationOn } from 'react-icons/ci';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { EventHeader } from '../components/Header';
 import useEventsStore from '../store/events.store';
@@ -88,28 +88,15 @@ export const EventPage = () => {
           PARTICIPAR
         </Button>
       </section>
+      <section className="Left-0 w-full p-6 border-t bg-white text-center">
+        <Link to={`/evaluations/${id}`}>
+          <h4 className='text-sm font-bold'>AVALIAR</h4>            
+        </Link>
+      </section>
       <section className="w-full">
         {message && (
           <DialogAlert message={message} open={showDialog} onClose={() => setShowDialog(false)}/>
         )}
-        {/* <AlertDialog>
-          {message && statusCode !== 201 ? (
-          <Alert variant={'destructive'}>
-            <AlertTitle>Atenção</AlertTitle>
-            <AlertDescription>
-              {message}
-            </AlertDescription>
-          </Alert>
-          ) : (
-            <Alert variant={'default'}>
-            <AlertTitle>Atenção</AlertTitle>
-            <AlertDescription>
-              {message}
-            </AlertDescription>
-          </Alert>
-          )}
-        </AlertDialog> */}
-        
       </section>
     </div>
   );
