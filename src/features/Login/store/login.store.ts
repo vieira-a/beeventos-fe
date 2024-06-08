@@ -42,6 +42,7 @@ const useLoginStore = create<LoginState>((set) => ({
 
     if (userProfile) {
       useSessionStore.getState().setUserRole(userProfile.role);
+      useSessionStore.getState().setUserId(userProfile.id);
     }
   },
 

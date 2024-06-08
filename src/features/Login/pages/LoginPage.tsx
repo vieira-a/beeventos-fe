@@ -1,16 +1,40 @@
-import logo from '../../../assets/logo.png';
-import { LoginForm } from '../components/LoginForm';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import useClickOutsideListener from '@/hooks/useClickOutsideListener';
+import { Link } from 'react-router-dom';
 
-export const Login = () => {
+import { LoginForm } from '../components/LoginForm';
+import useLoginDialogStore from '../store/login-dialog.store';
+
+export function Login() {
+  const { isLoginDialogOpen, closeLoginDialog } = useLoginDialogStore();
+  const dialogRef = useClickOutsideListener(isLoginDialogOpen, closeLoginDialog);
+  const loginForm = useClickOutsideListener(isLoginDialogOpen, closeLoginDialog);
+
   return (
-    <section className="flex flex-col gap-6 p-8">
-      <div className="flex flex-col text-center">
-        <img src={logo} alt="Logo Beeventos" className="w-[50%] m-auto" />
-        <h2>Login</h2>
-      </div>
-      <div>
-        <LoginForm />
-      </div>
-    </section>
+    <div>
+      <Dialog open={isLoginDialogOpen} onOpenChange={closeLoginDialog}>
+        <DialogContent ref={dialogRef} className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Login</DialogTitle>
+            <DialogDescription>
+              Faça login para participar de eventos.
+            </DialogDescription>
+          </DialogHeader>
+            <div ref={loginForm}>
+              <LoginForm/>
+            </div>
+          <DialogFooter>
+            <div>
+              <p className='text-sm text-center'>
+                Ainda não tem conta? Registre-se&nbsp;
+                <Link className='text-yellow-600 underline decoration-bouble' to={"/register"} onClick={closeLoginDialog}>
+                  aqui
+                </Link>
+              </p>
+            </div>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
-};
+}

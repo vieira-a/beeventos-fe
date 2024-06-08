@@ -16,8 +16,8 @@ function App() {
           <Route element={<HomePage />} path='/' />
           <Route element={<EventPage />} path='/event/:id' />
           <Route element={<RegisterPage />} path='/register'/>
-          <Route element={<Login />} path='/login' />
         </Routes>
+        <Login />
       </Router>
       
     </main>

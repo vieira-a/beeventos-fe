@@ -35,7 +35,6 @@ export class EventService {
 
   async readEventById(id: string) {
     let url = `${API_URLS.EVENTS}/${id}`;
-
     try {
       const response = await fetch(url.toString(), {
         method: 'GET',
