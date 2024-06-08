@@ -1,4 +1,6 @@
 import { Button } from '@/components/ui/button';
+import useLoginDialogStore from '@/features/Login/store/login-dialog.store';
+import useSessionStore from '@/features/Login/store/session.store';
 import { useEffect } from 'react';
 import { CiClock2, CiLocationOn } from 'react-icons/ci';
 import { useParams } from 'react-router-dom';
@@ -10,12 +12,23 @@ export const EventPage = () => {
   const { id } = useParams();
   const readEventById = useEventsStore((store) => store.readEventById);
   const event = useEventsStore((store) => store.event);
+  const openLoginDialog = useLoginDialogStore((store) => store.openLoginDialog)
+  const closeLoginDialog = useLoginDialogStore((store) => store.closeLoginDialog)
+  const isLogged = useSessionStore((store) => store.isLogged);
 
   useEffect(() => {
     if (id) {
       readEventById(id);
     }
   }, [id]);
+
+  const handleLoginDialog = () => {
+    if(!isLogged) {
+      openLoginDialog()
+    } else {
+      closeLoginDialog()
+    }
+  }
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -52,6 +65,7 @@ export const EventPage = () => {
 
       <section className="fixed bottom-0 left-0 w-full p-3 border-t bg-white">
         <Button
+          onClick={handleLoginDialog}
           className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full text-xs font-semibold tracking-wider"
         >
           PARTICIPAR

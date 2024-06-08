@@ -3,15 +3,19 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 
 import { LoginSchema, LoginSchemaType } from '../schema/login.schema';
+import useLoginDialogStore from '../store/login-dialog.store';
 import useLoginStore from '../store/login.store';
+import useSessionStore from '../store/session.store';
 
 export function LoginForm() {
   const login = useLoginStore((state) => state.login);
+  const isLogged = useSessionStore((store) => store.isLogged);
   const errorMessage = useLoginStore((state) => state.errorMessage);
+  const closeLoginDialog = useLoginDialogStore((state) => state.closeLoginDialog)
 
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(LoginSchema),
@@ -20,6 +24,12 @@ export function LoginForm() {
   function onSubmit(data: LoginSchemaType) {
     login(data.email, data.password, data.loginRole);
   }
+
+  useEffect(() => {
+    if(isLogged) {
+      closeLoginDialog()
+    }
+  }, [isLogged])
 
   return (
     <Form {...form}>
@@ -75,7 +85,6 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <p className='text-sm text-center'>Ainda não tem conta? Registre-se <Link to={"/register"}><span className=' text-yellow-600 underline decoration-bouble'>aqui</span></Link></p>
         <Button className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full">
           Entrar
         </Button>
