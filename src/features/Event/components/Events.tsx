@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { EventFilterOptions } from '../types/filter-options.types';
 import { EventCard } from './EventCard';
+import { EventsCarousel } from './EventsCarousel';
 
 export const Events = () => {
   const [searchParam, setSearchParam] = useState<EventFilterOptions>({title: ''});
@@ -26,6 +27,7 @@ export const Events = () => {
         />
         <h3 className='font-bold'>Encontre um evento e aproveite</h3>
       </div>
+      <EventsCarousel />
       <div>
         {events?.data?.map((item) => (
           <EventCard

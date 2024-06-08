@@ -43,11 +43,11 @@ export const EventPage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col gap-3 p-3 border-b">
+      <section className="flex flex-col gap-3 p-3">
         <div>
           <h5>Sobre o evento</h5>
         </div>
-        <p className="text-xs text-slate-600">{event.about}</p>
+        <p className="text-sm text-slate-600">{event.about}</p>
       </section>
 
       <section className="fixed bottom-0 left-0 w-full p-3 border-t bg-white">
