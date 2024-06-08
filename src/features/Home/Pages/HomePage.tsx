@@ -1,5 +1,10 @@
-export const HomePage = () => {
+import { Events } from '@/features/Event/components';
+
+export const HomePage = () => {  
+
   return (
-    <h1>Events</h1>
-  )
-}
+    <section className="p-8">
+      <Events />
+    </section>
+  );
+};

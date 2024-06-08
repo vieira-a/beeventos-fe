@@ -73,9 +73,23 @@
   }
   h1 {
     @apply text-3xl;
+    @apply text-slate-600;
   }
   h2 {
     @apply text-2xl;
+    @apply text-slate-600;
+  }
+  h3 {
+    @apply text-xl;
+    @apply text-slate-600;
+  }
+  h4 {
+    @apply text-lg;
+    @apply text-slate-600;
+  }
+  h5 {
+    @apply text-base;
+    @apply text-slate-600;
   }
   body {
     @apply bg-background text-foreground;
