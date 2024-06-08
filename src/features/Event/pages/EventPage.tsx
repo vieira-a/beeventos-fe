@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { CiClock2, CiLocationOn } from 'react-icons/ci';
 import { useParams } from 'react-router-dom';
 
+import { EventHeader } from '../components/Header';
 import useEventsStore from '../store/events.store';
 
 export const EventPage = () => {
@@ -18,6 +19,7 @@ export const EventPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative">
+      <EventHeader />
       <section className="flex flex-col gap-3 border-b">
         <div>
           <img src={event.bannerUrl} alt={`Banner do evento ${event.title}`} />
