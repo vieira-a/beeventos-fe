@@ -1,23 +1,19 @@
 import { create } from 'zustand';
 
 import { EventService } from '../services/event.service';
-import { EventsResult, EventsState } from '../types/events.types';
+import {
+  EventsResult,
+  EventsState,
+  initialEvent,
+  initialResult,
+} from '../types/events.types';
 import { EventFilterOptions } from '../types/filter-options.types';
 
 const eventService = new EventService();
 
 const useEventsStore = create<EventsState>((set) => ({
-  result: {
-    data: [],
-    meta: {
-      page: 1,
-      take: 10,
-      itemCount: 0,
-      pageCount: 1,
-      hasNextPage: false,
-      hasPreviousPage: false,
-    },
-  },
+  event: initialEvent,
+  result: initialResult,
 
   setResult: (events: EventsResult) => {
     set((state) => ({ ...state, result: events }));
@@ -25,6 +21,16 @@ const useEventsStore = create<EventsState>((set) => ({
 
   filterOptions: {
     title: '',
+  },
+
+  readEventById: async (id: string) => {
+    const data = await eventService.readEventById(id);
+
+    if (data) {
+      set({ event: data.data });
+    } else {
+      set({ event: initialEvent });
+    }
   },
 
   setFilterOptions: (options: EventFilterOptions) => {
@@ -44,7 +50,7 @@ const useEventsStore = create<EventsState>((set) => ({
             page: 1,
             take: 10,
             itemCount: 0,
-            pageCount: 0,
+            pageCount: 1,
             hasNextPage: false,
             hasPreviousPage: false,
           },

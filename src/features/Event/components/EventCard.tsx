@@ -1,4 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton';
+import { Link } from 'react-router-dom';
 
 import { EventCardTypes } from '../types';
 
@@ -20,7 +21,9 @@ export const EventCard = ( props: EventCardTypes ) => {
             <p>{props.startAt} {'>'} {props.endAt}</p>
           </div>
           <div>
-            <h4 className='text-sm font-bold'>{props.title}</h4>            
+            <Link to={`/event/${props.id}`}>
+              <h4 className='text-sm font-bold'>{props.title}</h4>            
+            </Link>
           </div>
           <div>
             <p className='text-xs text-slate-500'>{props.local}</p>            

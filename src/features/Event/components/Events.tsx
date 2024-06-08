@@ -18,7 +18,6 @@ export const Events = () => {
     setSearchParam({ title: event.target.value });
   };
 
-
   return (
     <section className='flex flex-col gap-4'>
       <div className='flex flex-col gap-4'>

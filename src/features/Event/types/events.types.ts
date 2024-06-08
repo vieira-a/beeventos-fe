@@ -23,7 +23,36 @@ export type EventsResult = {
 };
 
 export type EventsState = {
+  event: Event;
   result: EventsResult;
   filterOptions: EventFilterOptions;
+  readEventById: (id: string) => void;
   readAllEvents: (filterOptions: EventFilterOptions) => void;
+};
+
+export const initialEvent: Event = {
+  id: '',
+  eventType: '',
+  title: '',
+  about: '',
+  bannerUrl: '',
+  user: '',
+  local: '',
+  startAt: '',
+  endAt: '',
+  createdAt: '',
+  status: '',
+  updatedAt: '',
+};
+
+export const initialResult: EventsResult = {
+  data: [],
+  meta: {
+    page: 1,
+    take: 10,
+    itemCount: 0,
+    pageCount: 1,
+    hasNextPage: false,
+    hasPreviousPage: false,
+  },
 };
