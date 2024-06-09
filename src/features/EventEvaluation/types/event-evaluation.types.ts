@@ -6,8 +6,8 @@ export type EvaluationState = {
 export type EventEvaluationData = {
   atendeeId?: string;
   rating: number;
-  comment: string;
-  anonymous: boolean;
+  comment?: string;
+  anonymous?: boolean;
 };
 
 export const initialEventEvaluationData: EventEvaluationData = {
