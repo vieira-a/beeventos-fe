@@ -26,4 +26,25 @@ export class EventEvaluationService {
       console.log('Erro ao avaliar evento' + error);
     }
   }
+
+  async readAtendeeRegistrations(atendeeId: string, token: string) {
+    let url = `${API_URLS.EVENTS}/registrations/${atendeeId}`;
+    try {
+      const response = await fetch(url.toString(), {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      console.log(
+        'Erro ao carregar registro de participações em eventos' + error,
+      );
+    }
+  }
 }
