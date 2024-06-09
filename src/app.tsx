@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/toaster';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { AtendeesRegisterPage } from './modules/atendees/pages';
@@ -17,12 +18,13 @@ function App() {
             <Route element={<AtendeeEventsPage />} path='/my-events'/>
             <Route element={<EventEvaluation />} path='/evaluations/:id'/>
           </Route>
-          <Route element={<Home />} path='/' />
-          <Route element={<EventPage />} path='/event/:id' />
           <Route element={<AtendeesRegisterPage />} path='/register'/>
+          <Route element={<Authentication />} path='/login'/>
+          <Route element={<EventPage />} path='/event/:id' />
+          <Route element={<Home />} path='/' />
         </Routes>
-        <Authentication />
       </Router>
+      <Toaster />
     </main>
   );
 }

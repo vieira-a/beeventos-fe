@@ -1,8 +1,10 @@
 import { EventHeader } from '@/modules/events/components/event-header';
 
 import { EventEvaluationForm } from '../components/event-evaluation-form';
+import useShowEvaluationToast from '../hooks/useShowEvanluationToast';
 
 export function EventEvaluation () {
+  useShowEvaluationToast()
   return (
     <>
     <EventHeader />

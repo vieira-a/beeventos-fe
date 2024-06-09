@@ -3,8 +3,10 @@ import { PageMeta } from '@/shared/types/pagination';
 
 export type EvaluationState = {
   data: EventEvaluationData;
-  setEvaluationData: (data: EventEvaluationData) => void;
   result: AtendeeRegistrationsResult;
+  evaluationResponse: EvaluationResponse;
+  setEvaluationResponse: (response: EvaluationResponse) => void;
+  setEvaluationData: (data: EventEvaluationData) => void;
   setAtendeeRegistrations: (atendeeId: string, token: string) => void;
 };
 
@@ -12,7 +14,7 @@ export type EventEvaluationData = {
   atendeeId?: string;
   rating: number;
   comment?: string;
-  anonymous?: boolean;
+  anonymous: boolean;
 };
 
 export const initialEventEvaluationData: EventEvaluationData = {
@@ -31,6 +33,16 @@ export type AtendeeRegistrations = {
   createdAt: string;
   updatedAt: string;
   event: Event;
+};
+
+export type EvaluationResponse = {
+  statusCode?: number | undefined;
+  message: string;
+};
+
+export const initialEvaluationResponse: EvaluationResponse = {
+  statusCode: undefined,
+  message: '',
 };
 
 export const initialAtendeeRegistrations: AtendeeRegistrations = {

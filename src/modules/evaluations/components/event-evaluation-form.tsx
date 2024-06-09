@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import { EventEvaluationSchema, EventEvaluationSchemaType } from '../schema';
 import { EventEvaluationService } from '../services/event-evaluation.service';
 import useEventEvaluationStore from '../store/event-evaluation.store';
+import { EventEvaluationData } from '../types/event-evaluation.types';
 
 export function EventEvaluationForm() {
   useGetUserProfile()
@@ -22,7 +23,8 @@ export function EventEvaluationForm() {
   const readEventById = useEventsStore((store) => store.readEventById);
   const userId = useSessionStore((store) => store.userId)
   const access_token = useSessionStore((store) => store.access_token);
-  const setEvaluationData = useEventEvaluationStore((store) => store.setEvaluationData)
+  const {setEvaluationData, setEvaluationResponse } = useEventEvaluationStore()
+ 
   const form = useForm<EventEvaluationSchemaType>({
     resolver: zodResolver(EventEvaluationSchema),
   });
@@ -36,24 +38,29 @@ export function EventEvaluationForm() {
   async function onSubmit(data: EventEvaluationSchemaType) {
     const eventEvaluationService = new EventEvaluationService();
 
-    let evaluationData;
+    let evaluationData: EventEvaluationData;
 
     if(data.anonymous) {
       evaluationData = {
-        ...data
+        ...data,
+        anonymous: true,
       }
     } else {
       evaluationData = {
         ...data,
-        atendeeId: userId
+        atendeeId: userId,
+        anonymous: false
       }
     }
 
     setEvaluationData(evaluationData)
-    
-    console.log('onSubmit > evaluationData', evaluationData)
+
     if (id) {
-      await eventEvaluationService.evaluateEvent(evaluationData, id, access_token)
+      const response = await eventEvaluationService.evaluateEvent(evaluationData, id, access_token);
+      setEvaluationResponse({
+        statusCode: await response.statusCode,
+        message: await response.message
+      })
     }
   }
 
