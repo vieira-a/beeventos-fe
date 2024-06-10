@@ -4,12 +4,26 @@ import { EventRegistrationService } from '../services';
 import {
   EventRegistration,
   initialEventRegistration,
+  initialRegistrationResponse,
+  RegistrationResponse,
 } from '../types/event-registration.types';
 
 const useEventRegistrationStore = create<EventRegistration>((set) => ({
-  statusCode: 0,
   data: initialEventRegistration.data,
-  message: initialEventRegistration.message,
+  registrationResponse: initialRegistrationResponse,
+
+  setRegistrationResponse: async (response: RegistrationResponse) => {
+    set({ registrationResponse: response });
+  },
+
+  clearRegistrationResponse: async () => {
+    set({
+      registrationResponse: {
+        message: undefined,
+        statusCode: undefined,
+      },
+    });
+  },
 
   setEventRegistration: async (
     eventId: string,
@@ -22,11 +36,14 @@ const useEventRegistrationStore = create<EventRegistration>((set) => ({
       atendeeId,
       token,
     );
+
     if (registration) {
+      set({ data: registration.data });
       set({
-        statusCode: registration.statusCode,
-        message: registration.message,
-        data: registration.data,
+        registrationResponse: {
+          message: registration.message,
+          statusCode: registration.statusCode,
+        },
       });
     }
   },

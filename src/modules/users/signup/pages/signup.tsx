@@ -1,19 +1,12 @@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { SignupForm } from '../components';
 import useShowSignupToast from '../hooks/useShowSignupToast';
 import useSignupStore from '../store/signup.store';
 
 export function SignUp() {
-  const navigate = useNavigate();
   const { isSignupDialogOpen, closeSignupDialog } = useSignupStore();
   useShowSignupToast()
-
-  useEffect(() => {
-    navigate('/')
-  }, [closeSignupDialog])
 
   return (
     <div>
