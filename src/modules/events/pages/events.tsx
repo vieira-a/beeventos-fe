@@ -8,7 +8,7 @@ import { EventFilterOptions } from '../types/filter-options.types';
 
 export const Events = () => {
   const [searchParam, setSearchParam] = useState<EventFilterOptions>({title: ''});
-  const readEvents = useEventsStore((store) => store.readAllEvents);
+  const readEvents = useEventsStore((store) => store.readAvalibleEvents);
   const events = useEventsStore((store) => store.result);
 
   useEffect(() => {
