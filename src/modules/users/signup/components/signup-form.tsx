@@ -23,8 +23,7 @@ export function SignupForm() {
       ...data,
       role: AccountRoles.ATENDEE
     }
-  
-    console.log(loginData)
+    
     const response = await signupService.signupAtendee(loginData);
     setSignupResponse({
       message: await response.message,
@@ -108,27 +107,6 @@ export function SignupForm() {
             </FormItem>
           )}
         />
-        {/* <FormField
-          control={form.control}
-          name="role"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Perfil</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecione um perfil de usuário" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="admin">Administrador</SelectItem>
-                  <SelectItem value="user">Organizador</SelectItem>
-                  <SelectItem value="atendee">Participante</SelectItem>
-                </SelectContent>
-              </Select>
-            </FormItem>
-          )}
-        /> */}
         <Button className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full">
           Criar conta
         </Button>
