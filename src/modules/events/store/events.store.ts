@@ -37,8 +37,8 @@ const useEventsStore = create<EventsState>((set) => ({
     set((state) => ({ ...state, filterOptions: options }));
   },
 
-  readAllEvents: async (filterOptions?: EventFilterOptions) => {
-    const data = await eventService.readAllEvents(filterOptions);
+  readAvalibleEvents: async (filterOptions?: EventFilterOptions) => {
+    const data = await eventService.readAvalibleEvents(filterOptions);
 
     if (data) {
       set({ result: data });

@@ -3,7 +3,7 @@ import { API_URLS } from '@/shared/constans/api-urls';
 import { EventFilterOptions } from '../types/filter-options.types';
 
 export class EventService {
-  async readAllEvents(filterOptions?: EventFilterOptions) {
+  async readAvalibleEvents(filterOptions?: EventFilterOptions) {
     let url = `${API_URLS.EVENTS}/avaliable`;
 
     if (filterOptions?.title) {
