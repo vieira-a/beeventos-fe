@@ -14,6 +14,7 @@ const eventService = new EventService();
 const useEventsStore = create<EventsState>((set) => ({
   event: initialEvent,
   result: initialResult,
+  allEvents: initialResult,
 
   setResult: (events: EventsResult) => {
     set((state) => ({ ...state, result: events }));
@@ -42,6 +43,27 @@ const useEventsStore = create<EventsState>((set) => ({
 
     if (data) {
       set({ result: data });
+    } else {
+      set({
+        result: {
+          data: [],
+          meta: {
+            page: 1,
+            take: 10,
+            itemCount: 0,
+            pageCount: 1,
+            hasNextPage: false,
+            hasPreviousPage: false,
+          },
+        },
+      });
+    }
+  },
+
+  readAllEvents: async (filterOptions?: EventFilterOptions) => {
+    const data = await eventService.readAllEvents(filterOptions);
+    if (data) {
+      set({ allEvents: data });
     } else {
       set({
         result: {

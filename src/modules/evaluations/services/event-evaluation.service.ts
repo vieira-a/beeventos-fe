@@ -22,7 +22,7 @@ export class EventEvaluationService {
       const result = await response.json();
       return result;
     } catch (error) {
-      console.log('Erro ao avaliar evento' + error);
+      throw new Error('Erro ao avaliar evento' + error);
     }
   }
 
@@ -41,9 +41,7 @@ export class EventEvaluationService {
 
       return result;
     } catch (error) {
-      console.log(
-        'Erro ao carregar registro de participações em eventos' + error,
-      );
+      throw new Error('Erro ao inscrever-se em evento' + error);
     }
   }
 }

@@ -1,15 +1,10 @@
-import { Button } from '@/components/ui/button';
-import useCreateEventStore from '@/modules/events/store/create-event.store';
+import { AdminEventsData } from '../../components/admin-events-data';
 
 export const Admin = () => {
-  const { openCreateEventDialog } = useCreateEventStore();
-  const handleCreateEventDialog = () => {
-    openCreateEventDialog()
-  }
-
+  
   return (
-    <Button
-      onClick={handleCreateEventDialog}
-    >Criar evento</Button>
+    <section className='flex flex-col gap-4'>
+      <AdminEventsData />
+  </section>
   )
 }

@@ -33,6 +33,36 @@ export class EventService {
     }
   }
 
+  async readAllEvents(filterOptions?: EventFilterOptions) {
+    let url = `${API_URLS.EVENTS}`;
+
+    if (filterOptions?.title) {
+      url += `?title=${encodeURIComponent(filterOptions.title)}`;
+    }
+
+    try {
+      const response = await fetch(url.toString(), {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (!data && !data.result) {
+        return;
+      }
+      return data.result;
+    } catch (error) {
+      return;
+    }
+  }
+
   async readEventById(id: string) {
     let url = `${API_URLS.EVENTS}/${id}`;
     try {
@@ -74,7 +104,6 @@ export class EventService {
       }
 
       const data = await response.json();
-      console.log('EventsTypes > ', data);
 
       return data;
     } catch (error) {
@@ -97,7 +126,7 @@ export class EventService {
       const result = await response.json();
       return result;
     } catch (error) {
-      console.log(
+      throw new Error(
         'Erro ao carregar registro de participações em eventos' + error,
       );
     }

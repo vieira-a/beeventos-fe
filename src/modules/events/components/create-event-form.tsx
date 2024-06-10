@@ -13,12 +13,10 @@ import { CreateEventSchema, CreateEventSchemaType } from '../schemas';
 import { EventService } from '../services/event.service';
 import useCreateEventStore from '../store/create-event.store';
 
-//import useCreateEventStore from '../store/create-event.store';
-
 export function CreateEventForm() {
   useGetUserProfile();
   const { access_token, userId } = useSessionStore();
-  const { setEventTypes, eventTypes, setCreateEventResponse, createEventResponse } = useCreateEventStore();
+  const { setEventTypes, eventTypes, setCreateEventResponse } = useCreateEventStore();
 
   useEffect(() => {
     setEventTypes(access_token)
@@ -33,7 +31,6 @@ export function CreateEventForm() {
       ...data,
       userId: userId
     }
-    console.log('createEventData: ', createEventData);
     
     const eventService = new EventService();
     const response = await eventService.createEvent(createEventData, access_token);
@@ -41,7 +38,6 @@ export function CreateEventForm() {
       message: await response.message,
       statusCode: await response.statusCode,
     })
-    console.log('createEventResponse', createEventResponse)
     }
     
   return (
@@ -166,7 +162,7 @@ export function CreateEventForm() {
           )}
         />
         <Button className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full">
-          Criar evento
+          Salvar
         </Button>
       </form>
     </Form>
