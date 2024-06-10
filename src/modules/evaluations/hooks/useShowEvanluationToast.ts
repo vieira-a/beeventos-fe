@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 import useEventEvaluationStore from '../store/event-evaluation.store';
 
 const useShowEvaluationToast = () => {
-  const { evaluationResponse } = useEventEvaluationStore();
+  const { evaluationResponse, clearEvaluationResponse } =
+    useEventEvaluationStore();
 
   useEffect(() => {
     if (evaluationResponse.statusCode) {
@@ -13,13 +14,15 @@ const useShowEvaluationToast = () => {
         description: evaluationResponse.message,
         variant: 'destructive',
       });
+      clearEvaluationResponse();
     } else if (!evaluationResponse.statusCode && evaluationResponse.message) {
       toast({
         title: 'Obrigado!',
         description: evaluationResponse.message,
       });
+      clearEvaluationResponse();
     }
-  }, [evaluationResponse]);
+  }, [evaluationResponse, clearEvaluationResponse]);
 };
 
 export default useShowEvaluationToast;

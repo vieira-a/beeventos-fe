@@ -6,6 +6,7 @@ export type EvaluationState = {
   result: AtendeeRegistrationsResult;
   evaluationResponse: EvaluationResponse;
   setEvaluationResponse: (response: EvaluationResponse) => void;
+  clearEvaluationResponse: () => void;
   setEvaluationData: (data: EventEvaluationData) => void;
   setAtendeeRegistrations: (atendeeId: string, token: string) => void;
 };

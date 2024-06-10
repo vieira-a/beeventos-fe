@@ -23,6 +23,14 @@ const useEventEvaluationStore = create<EvaluationState>((set) => ({
     set({ evaluationResponse: response });
   },
 
+  clearEvaluationResponse: () =>
+    set({
+      evaluationResponse: {
+        statusCode: undefined,
+        message: undefined,
+      },
+    }),
+
   setAtendeeRegistrations: async (atendeeId: string, token: string) => {
     const eventEvaluationService = new EventEvaluationService();
     const result = await eventEvaluationService.readAtendeeRegistrations(
