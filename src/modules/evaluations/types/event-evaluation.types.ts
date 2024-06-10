@@ -37,12 +37,12 @@ export type AtendeeRegistrations = {
 
 export type EvaluationResponse = {
   statusCode?: number | undefined;
-  message: string;
+  message: string | undefined;
 };
 
 export const initialEvaluationResponse: EvaluationResponse = {
   statusCode: undefined,
-  message: '',
+  message: undefined,
 };
 
 export const initialAtendeeRegistrations: AtendeeRegistrations = {

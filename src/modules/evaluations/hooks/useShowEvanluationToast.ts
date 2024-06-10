@@ -13,7 +13,7 @@ const useShowEvaluationToast = () => {
         description: evaluationResponse.message,
         variant: 'destructive',
       });
-    } else {
+    } else if (!evaluationResponse.statusCode && evaluationResponse.message) {
       toast({
         title: 'Obrigado!',
         description: evaluationResponse.message,
