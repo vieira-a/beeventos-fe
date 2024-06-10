@@ -17,6 +17,7 @@ export class SignupService {
       }
 
       const result = await response.json();
+      console.log('SignupService', result);
       return result;
     } catch (error) {
       throw new Error('Erro ao tentar criar conta' + error);

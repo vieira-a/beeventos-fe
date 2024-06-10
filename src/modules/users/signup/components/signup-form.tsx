@@ -6,15 +6,17 @@ import { useForm } from 'react-hook-form';
 
 import { SignupSchema, SignupSchemaType } from '../schemas';
 import { SignupService } from '../services/signup.service';
+import useSignupStore from '../store/signup.store';
 import { AccountRoles } from '../types/account-roles';
 
 export function SignupForm() {
+  const setSignupResponse = useSignupStore((store) => store.setSignupResponse);
 
   const form = useForm<SignupSchemaType>({
     resolver: zodResolver(SignupSchema),
   });
 
-  function onSubmit(data: SignupSchemaType) {
+  async function onSubmit(data: SignupSchemaType) {
     const signupService = new SignupService();
 
     const loginData = {
@@ -23,7 +25,11 @@ export function SignupForm() {
     }
   
     console.log(loginData)
-    signupService.signupAtendee(loginData)
+    const response = await signupService.signupAtendee(loginData);
+    setSignupResponse({
+      message: await response.message,
+      statusCode: await response.statusCode,
+    })
   }
 
   return (
