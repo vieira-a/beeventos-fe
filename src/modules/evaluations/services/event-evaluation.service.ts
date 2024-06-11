@@ -44,4 +44,23 @@ export class EventEvaluationService {
       throw new Error('Erro ao inscrever-se em evento' + error);
     }
   }
+
+  async readEventEvaluations(eventId: string, token: string) {
+    let url = `${API_URLS.EVALUATIONS}/${eventId}`;
+    try {
+      const response = await fetch(url.toString(), {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const result = await response.json();
+
+      return result;
+    } catch (error) {
+      throw new Error('Erro carregar avaliações do evento' + error);
+    }
+  }
 }

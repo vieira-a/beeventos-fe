@@ -1,12 +1,7 @@
 import { create } from 'zustand';
 
 import { EventService } from '../services/event.service';
-import {
-  EventsResult,
-  EventsState,
-  initialEvent,
-  initialResult,
-} from '../types/events.types';
+import { EventsResult, EventsState, initialEvent, initialResult } from '../types/events.types';
 import { EventFilterOptions } from '../types/filter-options.types';
 
 const eventService = new EventService();
