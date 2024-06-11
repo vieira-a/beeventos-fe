@@ -5,6 +5,8 @@ export type EvaluationState = {
   data: EventEvaluationData;
   result: AtendeeRegistrationsResult;
   evaluationResponse: EvaluationResponse;
+  eventEvaluations: EventEvaluations;
+  setEventEvaluations: (eventId: string, token: string) => void;
   setEvaluationResponse: (response: EvaluationResponse) => void;
   clearEvaluationResponse: () => void;
   setEvaluationData: (data: EventEvaluationData) => void;
@@ -16,6 +18,24 @@ export type EventEvaluationData = {
   rating: number;
   comment?: string;
   anonymous: boolean;
+};
+
+export type EventEvaluations = {
+  data: {
+    evaluations: Evaluations[];
+    average: number;
+  };
+  meta: PageMeta;
+};
+
+export type Evaluations = {
+  id: string;
+  atendee: string;
+  event: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export const initialEventEvaluationData: EventEvaluationData = {
@@ -64,5 +84,15 @@ export const initialPageMeta: PageMeta = {
 
 export const initialAtendeeRegistrationsResult: AtendeeRegistrationsResult = {
   data: [initialAtendeeRegistrations],
+  meta: initialPageMeta,
+};
+
+export const initialEvaluations: Evaluations[] = [];
+
+export const initialEventEvaluations: EventEvaluations = {
+  data: {
+    evaluations: initialEvaluations,
+    average: 0,
+  },
   meta: initialPageMeta,
 };

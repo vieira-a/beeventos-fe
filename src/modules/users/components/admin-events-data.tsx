@@ -15,7 +15,8 @@ import useCreateEventStore from '@/modules/events/store/create-event.store';
 import useEventsStore from '@/modules/events/store/events.store';
 import { EventFilterOptions } from '@/modules/events/types/filter-options.types';
 import { useEffect, useState } from 'react';
-
+import { FaEye } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export function AdminEventsData() {
   const { openCreateEventDialog } = useCreateEventStore();
@@ -58,20 +59,24 @@ export function AdminEventsData() {
               <TableHead>Data</TableHead>
               <TableHead>Evento</TableHead>
               <TableHead>Local</TableHead>
+              <TableHead>Avaliações</TableHead>
             </TableRow>
-          </TableHeader>
+          </TableHeader >
           <TableBody className='text-xs'>
             {allEvents && allEvents.data.map((event) => (
               <TableRow key={event.id}>
                 <TableCell className="font-medium">{event.createdAt.split(',')[0]}</TableCell>
                 <TableCell>{event.title}</TableCell>
                 <TableCell>{event.local}</TableCell>
+                <TableCell className='text-right'>
+                  <Link to={`/event/${event.id}/evaluations`}>
+                    <FaEye className='text-xl text-yellow-500'/>
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter>
-            <TableRow>
-            </TableRow>
           </TableFooter>
         </Table>
       </section>
