@@ -8,6 +8,8 @@ export class AuthService {
       loginUserUrl = API_URLS.LOGIN_USER;
     } else if (loginRole === 'atendee') {
       loginUserUrl = API_URLS.LOGIN_ATENDEE;
+    } else {
+      throw new Error('Invalid login role');
     }
 
     try {
@@ -19,12 +21,19 @@ export class AuthService {
         body: JSON.stringify({ email, password }),
       });
 
-      if (!response) {
-        throw new Error('Erro na tentativa de login');
+      if (!response.ok) {
+        throw new Error(
+          `Erro na tentativa de login: ${response.status} ${response.statusText}`,
+        );
+      }
+      const contentType = response.headers.get('Content-Type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error(
+          `Erro na tentativa de login: Resposta não é JSON. Content-Type: ${contentType}`,
+        );
       }
 
       const data = await response.json();
-
       return data;
     } catch (error) {
       throw new Error('Erro na tentativa de login: ' + error);
