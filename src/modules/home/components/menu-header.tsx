@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 export const MenuHeader = () => {
   const isLogged = useSessionStore((store) => store.isLogged);
+  const userRole = useSessionStore((store) => store.userRole);
   const openLoginDialog = useAuthStore((store) => store.openLoginDialog);
   const openSignupDialog = useSignupStore((store) => store.openSignupDialog)
   
@@ -23,9 +24,14 @@ export const MenuHeader = () => {
       </div>
       <nav>
         <ul className='text-slate-700 text-xs font-semibold uppercase flex gap-4 items-center'>
+          {userRole && userRole === 'admin' && (
+            <li>
+            <Link className='border bg-yellow-400 border-yellow-400 rounded px-4 py-2 hover:bg-yellow-300 cursor-pointer' to={'/admin'}>Admin</Link>
+          </li>
+          )}
           {isLogged ? (
             <li>
-              <Link to={'/my-events'}>Meus eventos</Link>
+              <Link className='border bg-yellow-400 border-yellow-400 rounded px-4 py-2 hover:bg-yellow-300 cursor-pointer' to={'/my-events'}>Meus eventos</Link>
             </li>
           ) : (
             <>

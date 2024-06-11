@@ -10,9 +10,8 @@ const useShowEventEvaluationToast = () => {
   useEffect(() => {
     if (evaluationResponse.statusCode) {
       toast({
-        title: 'Uh oh! Algo deu errado.',
+        title: 'Não há dados.',
         description: evaluationResponse.message,
-        variant: 'destructive',
       });
       clearEvaluationResponse();
     }
