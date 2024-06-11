@@ -13,7 +13,7 @@ export const EventsCarousel = () => {
           <CarouselItem key={index}>
               <Card>
                 <CardContent>
-                  <img src={event.bannerUrl} alt={`Imagem do evento ${event.title}`} className="object-cover rounded" />
+                  <img src={event.bannerUrl ? event.bannerUrl : 'https://cdn.uniacco.com/blog/wp-content/uploads/2021/06/02122221/stem-list-EVgsAbL51Rk-unsplash1-min-1024x576.jpg'} alt={`Imagem do evento ${event.title}`} className="object-cover rounded" />
                 </CardContent>
               </Card>
           </CarouselItem>

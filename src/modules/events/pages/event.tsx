@@ -50,7 +50,7 @@ export const EventPage = () => {
       <EventHeader />
       <section className="flex flex-col gap-3 border-b">
         <div>
-          <img src={event.bannerUrl} alt={`Banner do evento ${event.title}`} />
+          <img src={event.bannerUrl ? event.bannerUrl : 'https://cdn.uniacco.com/blog/wp-content/uploads/2021/06/02122221/stem-list-EVgsAbL51Rk-unsplash1-min-1024x576.jpg'} alt={`Banner do evento ${event.title}`} />
         </div>
         <div className="flex flex-col gap-3 p-3">
           <div>

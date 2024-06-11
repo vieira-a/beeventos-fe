@@ -11,17 +11,21 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { EventHeader } from '@/modules/events/components';
+import { EventService } from '@/modules/events/services/event.service';
 import useCreateEventStore from '@/modules/events/store/create-event.store';
 import useEventsStore from '@/modules/events/store/events.store';
 import { EventFilterOptions } from '@/modules/events/types/filter-options.types';
 import { useEffect, useState } from 'react';
-import { FaEye } from 'react-icons/fa';
+import { FaEye, FaLock } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+import useSessionStore from '../auth/store/session.store';
+
 export function AdminEventsData() {
-  const { openCreateEventDialog } = useCreateEventStore();
+  const { openCreateEventDialog, setFinishEventResponse } = useCreateEventStore();
   const [searchParam, setSearchParam] = useState<EventFilterOptions>({title: ''});
   const { allEvents, readAllEvents } = useEventsStore();
+  const access_token = useSessionStore((store) => store.access_token);
   
   useEffect(() => {
     readAllEvents(searchParam);
@@ -34,6 +38,17 @@ export function AdminEventsData() {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchParam({ title: event.target.value });
   };
+
+  const handleFinishEvent = async (id: string) => {
+    const eventService = new EventService();
+    const result = await eventService.finishEvent(id, access_token)
+    if (result) {
+      setFinishEventResponse({
+        statusCode: result.statusCode,
+        message: result.message
+      })
+    }
+  }
 
   return (
     <>
@@ -60,6 +75,7 @@ export function AdminEventsData() {
               <TableHead>Evento</TableHead>
               <TableHead>Local</TableHead>
               <TableHead>Avaliações</TableHead>
+              <TableHead>Finalizar</TableHead>
             </TableRow>
           </TableHeader >
           <TableBody className='text-xs'>
@@ -73,8 +89,12 @@ export function AdminEventsData() {
                     <FaEye className='text-xl text-yellow-500'/>
                   </Link>
                 </TableCell>
+                <TableCell className='text-right'>
+                  <FaLock onClick={() => handleFinishEvent(event.id)} className='text-xl text-yellow-500 cursor-pointer'/>
+                </TableCell>
               </TableRow>
             ))}
+
           </TableBody>
           <TableFooter>
           </TableFooter>

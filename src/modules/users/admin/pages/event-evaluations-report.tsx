@@ -32,7 +32,7 @@ export const EventEvaluationsReport = () => {
       <section>
         {event && (
           <div>
-            <img src={event.bannerUrl} alt={`Banner do evento ${event.title}`} />
+            <img src={event.bannerUrl ? event.bannerUrl : 'https://cdn.uniacco.com/blog/wp-content/uploads/2021/06/02122221/stem-list-EVgsAbL51Rk-unsplash1-min-1024x576.jpg'} alt={`Banner do evento ${event.title}`} />
           </div>
         )}
       </section>
