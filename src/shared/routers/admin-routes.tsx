@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 export const AdminRoutes = () => {
+
   const navigate = useNavigate()
   useGetUserProfile();
   const openLoginDialog = useLoginStore((store) => store.openLoginDialog)
@@ -12,6 +13,7 @@ export const AdminRoutes = () => {
 
   useEffect(() => {
     if (!isLogged) {
+      navigate('/')
       openLoginDialog();
     }
 
