@@ -6,6 +6,7 @@ import { EventCard } from '../components/event-card';
 import { EventsCarousel } from '../components/events-carousel';
 import useEventsStore from '../store/events.store';
 import { EventFilterOptions } from '../types/filter-options.types';
+import EventDefaultBanner from '/event-default.jpg';
 
 export const Events = () => {
   const [searchParam, setSearchParam] = useState<EventFilterOptions>({title: ''});
@@ -37,7 +38,7 @@ export const Events = () => {
         <EventCard
           key={item.id}
           id={item.id}
-          bannerUrl={item.bannerUrl}
+          bannerUrl={item.bannerUrl ? item.bannerUrl : EventDefaultBanner}
           startAt={item.startAt}
           endAt={item.endAt}
           title={item.title}

@@ -10,6 +10,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import { EventHeader } from '../components/event-header';
 import useEventsStore from '../store/events.store';
+import EventDefaultBanner from '/event-default.jpg';
 
 export const EventPage = () => {
   useGetUserProfile();
@@ -50,7 +51,7 @@ export const EventPage = () => {
       <EventHeader />
       <section className="flex flex-col gap-3 border-b">
         <div>
-          <img src={event.bannerUrl} alt={`Banner do evento ${event.title}`} />
+          <img src={event.bannerUrl ? event.bannerUrl : EventDefaultBanner} alt={`Banner do evento ${event.title}`} />
         </div>
         <div className="flex flex-col gap-3 p-3">
           <div>

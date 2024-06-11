@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 
 import useGetUserProfile from '../../auth/hooks/useGetUserProfile';
 import useSessionStore from '../../auth/store/session.store';
+import EventDefaultBanner from '/event-default.jpg';
 
 export const EventEvaluationsReport = () => {
   useGetUserProfile()
@@ -32,7 +33,7 @@ export const EventEvaluationsReport = () => {
       <section>
         {event && (
           <div>
-            <img src={event.bannerUrl} alt={`Banner do evento ${event.title}`} />
+            <img src={event.bannerUrl ? event.bannerUrl : EventDefaultBanner} alt={`Banner do evento ${event.title}`} />
           </div>
         )}
       </section>
