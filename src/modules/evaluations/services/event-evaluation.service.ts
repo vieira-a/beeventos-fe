@@ -1,5 +1,3 @@
-import { API_URLS } from '@/shared/constans/api-urls';
-
 import { EventEvaluationData } from '../types/event-evaluation.types';
 
 export class EventEvaluationService {
@@ -8,16 +6,19 @@ export class EventEvaluationService {
     eventId: string,
     token: string,
   ) {
-    let url = `${API_URLS.EVENTS}/${eventId}/evaluations`;
+    //let url = `${API_URLS.EVENTS}/${eventId}/evaluations`;
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `https://beeventos-be-production.up.railway.app/api/v1/events/${eventId}/evaluations`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(data),
         },
-        body: JSON.stringify(data),
-      });
+      );
 
       const result = await response.json();
       return result;
@@ -27,15 +28,18 @@ export class EventEvaluationService {
   }
 
   async readAtendeeRegistrations(atendeeId: string, token: string) {
-    let url = `${API_URLS.EVENTS}/registrations/${atendeeId}`;
+    //let url = `${API_URLS.EVENTS}/registrations/${atendeeId}`;
     try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `https://beeventos-be-production.up.railway.app/api/v1/events/registrations/${atendeeId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       const result = await response.json();
 
@@ -46,15 +50,18 @@ export class EventEvaluationService {
   }
 
   async readEventEvaluations(eventId: string, token: string) {
-    let url = `${API_URLS.EVALUATIONS}/${eventId}`;
+    //let url = `${API_URLS.EVALUATIONS}/${eventId}`;
     try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `https://beeventos-be-production.up.railway.app/api/v1/evaluations/${eventId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       const result = await response.json();
 

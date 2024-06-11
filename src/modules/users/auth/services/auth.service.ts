@@ -12,8 +12,6 @@ export class AuthService {
       throw new Error('Invalid login role');
     }
 
-    console.log('Call URL: ', loginUserUrl);
-
     try {
       const response = await fetch(loginUserUrl, {
         method: 'POST',
