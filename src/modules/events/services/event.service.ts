@@ -11,7 +11,7 @@ export class EventService {
     }
 
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export class EventService {
     }
 
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export class EventService {
   async readEventById(id: string) {
     let url = `${API_URLS.EVENTS}/${id}`;
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export class EventService {
   async readEventsTypes(token: string) {
     let url = `${API_URLS.EVENTS_TYPES}`;
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ export class EventService {
   async createEvent(data: any, token: string) {
     let url = `${API_URLS.EVENTS}`;
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

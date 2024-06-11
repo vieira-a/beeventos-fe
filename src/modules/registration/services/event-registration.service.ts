@@ -4,7 +4,7 @@ export class EventRegistrationService {
   async registration(eventId: string, atendeeId: string, token: string) {
     let url = `${API_URLS.EVENTS}/${eventId}/registrations`;
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

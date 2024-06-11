@@ -11,7 +11,7 @@ export class AuthService {
     }
 
     try {
-      const response = await fetch(`${loginUserUrl.toString()}`, {
+      const response = await fetch(`${loginUserUrl}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export class AuthService {
     const readUserProfileUrl = API_URLS.USER_PROFILE;
 
     try {
-      const response = await fetch(`${readUserProfileUrl.toString()}`, {
+      const response = await fetch(`${readUserProfileUrl}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${access_token}`,
