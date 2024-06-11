@@ -1,16 +1,18 @@
-import { API_URLS } from '@/shared/constans/api-urls';
-
 export class AuthService {
   async auth(email: string, password: string, loginRole: string) {
     let loginUserUrl: string = '';
 
     if (loginRole === 'user') {
-      loginUserUrl = API_URLS.LOGIN_USER;
+      loginUserUrl =
+        'https://beeventos-be-production.up.railway.app/api/v1/users/login';
     } else if (loginRole === 'atendee') {
-      loginUserUrl = API_URLS.LOGIN_ATENDEE;
+      loginUserUrl =
+        'https://beeventos-be-production.up.railway.app/api/v1/atendees/login';
     } else {
       throw new Error('Invalid login role');
     }
+
+    console.log('Call URL: ', loginUserUrl);
 
     try {
       const response = await fetch(loginUserUrl, {
@@ -41,7 +43,8 @@ export class AuthService {
   }
 
   async readUserProfile(access_token: string) {
-    const readUserProfileUrl = API_URLS.USER_PROFILE;
+    const readUserProfileUrl =
+      'https://beeventos-be-production.up.railway.app/api/v1/users/profile';
 
     try {
       const response = await fetch(readUserProfileUrl, {
