@@ -10,7 +10,7 @@ export class EventEvaluationService {
   ) {
     let url = `${API_URLS.EVENTS}/${eventId}/evaluations`;
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export class EventEvaluationService {
   async readAtendeeRegistrations(atendeeId: string, token: string) {
     let url = `${API_URLS.EVENTS}/registrations/${atendeeId}`;
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export class EventEvaluationService {
   async readEventEvaluations(eventId: string, token: string) {
     let url = `${API_URLS.EVALUATIONS}/${eventId}`;
     try {
-      const response = await fetch(url.toString(), {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
