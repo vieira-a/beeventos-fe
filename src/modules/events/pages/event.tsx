@@ -1,10 +1,10 @@
-import { DialogAlert } from '@/components/AlertDialog/alert-dialog';
 import { Button } from '@/components/ui/button';
+import useShowRegistrationToast from '@/modules/registration/hooks/useShowRegistrationToast';
 import useEventRegistrationStore from '@/modules/registration/store/event-registration.store';
 import useGetUserProfile from '@/modules/users/auth/hooks/useGetUserProfile';
 import useLoginStore from '@/modules/users/auth/store/auth.store';
 import useSessionStore from '@/modules/users/auth/store/session.store';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { CiClock2, CiLocationOn } from 'react-icons/ci';
 import { Link, useParams } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import useEventsStore from '../store/events.store';
 
 export const EventPage = () => {
   useGetUserProfile();
+  useShowRegistrationToast();
   const { id } = useParams();
   const readEventById = useEventsStore((store) => store.readEventById);
   const event = useEventsStore((store) => store.event);
@@ -22,8 +23,6 @@ export const EventPage = () => {
   const userId = useSessionStore((store) => store.userId);
   const access_token = useSessionStore((store) => store.access_token);
   const setEventRegistration = useEventRegistrationStore((store) => store.setEventRegistration)
-  const message = useEventRegistrationStore((store) => store.message);
-  const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -44,7 +43,6 @@ export const EventPage = () => {
     if (id && userId && access_token) {
       setEventRegistration(id, userId, access_token)
     }
-    setShowDialog(true)
   }
 
   return (
@@ -92,11 +90,6 @@ export const EventPage = () => {
         <Link to={`/evaluations/${id}`}>
           <h4 className='text-sm font-bold'>AVALIAR</h4>            
         </Link>
-      </section>
-      <section className="w-full">
-        {message && (
-          <DialogAlert message={message} open={showDialog} onClose={() => setShowDialog(false)}/>
-        )}
       </section>
     </div>
   );
