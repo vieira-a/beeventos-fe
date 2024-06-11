@@ -10,8 +10,8 @@ export function CreateEvent() {
 
   return (
     <div>
-      <Dialog open={isCreateEventDialogOpen} onOpenChange={closeCreateEventDialog}>
-        <DialogContent className="sm:max-w-[425px]">
+      <Dialog open={isCreateEventDialogOpen} onOpenChange={closeCreateEventDialog} >
+        <DialogContent className="sm:max-w-[425px] overflow-y-auto max-h-[80vh]">
           <DialogHeader>
             <DialogTitle>Novo evento</DialogTitle>
             <DialogDescription>
