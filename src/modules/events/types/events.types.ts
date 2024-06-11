@@ -25,9 +25,11 @@ export type EventsResult = {
 export type EventsState = {
   event: Event;
   result: EventsResult;
+  allEvents: EventsResult;
   filterOptions: EventFilterOptions;
   readEventById: (id: string) => void;
   readAllEvents: (filterOptions: EventFilterOptions) => void;
+  readAvalibleEvents: (filterOptions: EventFilterOptions) => void;
 };
 
 export const initialEvent: Event = {

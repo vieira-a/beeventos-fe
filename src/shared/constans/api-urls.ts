@@ -3,4 +3,6 @@ const baseUrl = 'http://172.16.0.29:3000/api/v1';
 
 export const API_URLS = {
   EVENTS: `${baseUrl}/events`,
+  EVENTS_TYPES: `${baseUrl}/events-types`,
+  EVALUATIONS: `${baseUrl}/evaluations`,
 };

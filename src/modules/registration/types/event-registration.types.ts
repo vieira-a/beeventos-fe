@@ -1,7 +1,13 @@
+export type RegistrationResponse = {
+  statusCode: number | undefined;
+  message: string | undefined;
+};
+
 export type EventRegistration = {
-  statusCode: number;
-  message: string;
   data: EventRegistrationData;
+  registrationResponse: RegistrationResponse;
+  setRegistrationResponse: (response: RegistrationResponse) => void;
+  clearRegistrationResponse: () => void;
   setEventRegistration: (
     eventId: string,
     atendeeId: string,
@@ -43,9 +49,15 @@ export const initialEventRegistrationData: EventRegistrationData = {
   deletedAt: '',
 };
 
+export const initialRegistrationResponse: RegistrationResponse = {
+  message: undefined,
+  statusCode: undefined,
+};
+
 export const initialEventRegistration: EventRegistration = {
-  statusCode: 0,
-  message: '',
   data: initialEventRegistrationData,
+  registrationResponse: initialRegistrationResponse,
+  setRegistrationResponse(): void {},
+  clearRegistrationResponse(): void {},
   setEventRegistration(): void {},
 };

@@ -1,12 +1,15 @@
-import { Toaster } from '@/components/ui/toaster';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { AtendeesRegisterPage } from './modules/atendees/pages';
+import { Toaster } from './components/ui/toaster';
 import { AtendeeEventsPage } from './modules/evaluations/pages/atendee-events';
 import { EventEvaluation } from './modules/evaluations/pages/event-evaluation';
 import { EventPage } from './modules/events/pages';
+import { CreateEvent } from './modules/events/pages/create-event';
 import { Home } from './modules/home/pages';
+import { Admin } from './modules/users/admin/pages/admin';
+import { EventEvaluationsReport } from './modules/users/admin/pages/event-evaluations-report';
 import { Authentication } from './modules/users/auth/pages';
+import { SignUp } from './modules/users/signup/pages';
 import { PrivateRoutes } from './shared/routers/private-routes';
 
 function App() {
@@ -17,12 +20,15 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route element={<AtendeeEventsPage />} path='/my-events'/>
             <Route element={<EventEvaluation />} path='/evaluations/:id'/>
+            <Route element={<EventEvaluationsReport />} path='/event/:id/evaluations'/>
           </Route>
-          <Route element={<AtendeesRegisterPage />} path='/register'/>
-          <Route element={<Authentication />} path='/login'/>
           <Route element={<EventPage />} path='/event/:id' />
+          <Route element={<Admin />} path='/admin' />
           <Route element={<Home />} path='/' />
         </Routes>
+        <Authentication />
+        <SignUp/>
+        <CreateEvent />
       </Router>
       <Toaster />
     </main>

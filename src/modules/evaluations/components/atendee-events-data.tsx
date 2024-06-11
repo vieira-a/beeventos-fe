@@ -51,12 +51,15 @@ export function AtendeeEventsData() {
             <TableCell className="font-medium">{registration.createdAt.split(',')[0]}</TableCell>
             <TableCell>{registration.event.title}</TableCell>
             <TableCell>{registration.event.local}</TableCell>
-            {registration.event.status === 'finished' && (
+            {registration.event.status === 'finished' ? (
                <TableCell>
                 <Link to={`/evaluations/${registration.event.id}`}>
                   <BiSolidMessageCheck className='text-2xl text-green-500 hover:text-green-400' />
-                  {/* <Button className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full">Avaliar</Button> */}
                 </Link>
+               </TableCell>
+            ) : (
+              <TableCell>
+                Não finalizado
                </TableCell>
             )}
           </TableRow>

@@ -135,10 +135,9 @@ export function EventEvaluationForm() {
         />
         <section className="fixed bottom-0 left-0 w-full p-3 border-t bg-white">
           <Button className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full">
-            Avaliar
+            Salvar
           </Button>
         </section>
-        {/* <FormMessage className="text-center">{errorMessage}</FormMessage> */}
       </form>
     </Form>
   );
