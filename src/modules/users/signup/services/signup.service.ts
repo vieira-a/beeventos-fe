@@ -6,7 +6,7 @@ export class SignupService {
   async signupAtendee(data: SignupData) {
     const signupAtendeeUrl = API_URLS.SIGNUP_ATENDEE;
     try {
-      const response = await fetch(`${signupAtendeeUrl}`, {
+      const response = await fetch(signupAtendeeUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
