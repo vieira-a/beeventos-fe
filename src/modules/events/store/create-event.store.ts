@@ -4,14 +4,17 @@ import { EventService } from '../services/event.service';
 import {
   CreateEventResponse,
   CreateEventState,
+  FinishEventResponse,
   initialCreateEventData,
   initialCreateEventResponse,
+  initialCreateFinishEventResponse,
   initialEventsTypesData,
 } from '../types/create-event.types';
 
 const useCreateEventStore = create<CreateEventState>((set) => ({
   createEventData: initialCreateEventData,
   createEventResponse: initialCreateEventResponse,
+  finishEventResponse: initialCreateFinishEventResponse,
   isCreateEventDialogOpen: false,
   eventTypes: initialEventsTypesData,
 
@@ -20,7 +23,24 @@ const useCreateEventStore = create<CreateEventState>((set) => ({
   closeCreateEventDialog: () => set({ isCreateEventDialogOpen: false }),
 
   setCreateEventResponse: async (response: CreateEventResponse) => {
-    set({ createEventResponse: response });
+    if (response) {
+      set({ createEventResponse: response });
+    } else {
+      set({ createEventResponse: initialCreateFinishEventResponse });
+    }
+  },
+
+  setFinishEventResponse: async (response: FinishEventResponse) => {
+    set({ finishEventResponse: response });
+  },
+
+  clearFinishEventResponse: async () => {
+    set({
+      finishEventResponse: {
+        statusCode: undefined,
+        message: undefined,
+      },
+    });
   },
 
   setEventTypes: async (access_token: string) => {

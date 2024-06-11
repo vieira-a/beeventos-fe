@@ -3,6 +3,11 @@ export type CreateEventResponse = {
   message: string | undefined;
 };
 
+export type FinishEventResponse = {
+  statusCode: number | undefined;
+  message: string | undefined;
+};
+
 export type CreateEventData = {
   title: string;
   about: string;
@@ -15,11 +20,14 @@ export type CreateEventData = {
 export type CreateEventState = {
   createEventData: CreateEventData;
   createEventResponse: CreateEventResponse;
+  finishEventResponse: FinishEventResponse;
   isCreateEventDialogOpen: boolean;
   eventTypes: EventsTypesData;
   setEventTypes: (access_token: string) => void;
   setCreateEventResponse: (response: CreateEventResponse) => void;
   clearCreateEventResponse: () => void;
+  setFinishEventResponse: (response: FinishEventResponse) => void;
+  clearFinishEventResponse: () => void;
   openCreateEventDialog: () => void;
   closeCreateEventDialog: () => void;
 };
@@ -36,6 +44,11 @@ export type EventTypes = {
 };
 
 export const initialCreateEventResponse: CreateEventResponse = {
+  message: undefined,
+  statusCode: undefined,
+};
+
+export const initialCreateFinishEventResponse: FinishEventResponse = {
   message: undefined,
   statusCode: undefined,
 };
@@ -63,11 +76,14 @@ export const initialEventsTypesData: EventsTypesData = {
 export const inicialCreateEventState: CreateEventState = {
   createEventData: initialCreateEventData,
   createEventResponse: initialCreateEventResponse,
+  finishEventResponse: initialCreateFinishEventResponse,
   isCreateEventDialogOpen: false,
   eventTypes: initialEventsTypesData,
   setEventTypes: () => void {},
   setCreateEventResponse: () => void {},
   clearCreateEventResponse: () => void {},
+  setFinishEventResponse: () => void {},
+  clearFinishEventResponse: () => void {},
   openCreateEventDialog: () => void {},
   closeCreateEventDialog: () => void {},
 };

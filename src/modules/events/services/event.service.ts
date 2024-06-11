@@ -141,4 +141,24 @@ export class EventService {
       );
     }
   }
+
+  async finishEvent(id: string, token: string) {
+    try {
+      const response = await fetch(
+        `https://beeventos-be-production.up.railway.app/api/v1/events/${id}/finish`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      throw new Error('Erro ao finalizar evento' + error);
+    }
+  }
 }
