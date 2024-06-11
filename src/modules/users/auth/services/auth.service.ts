@@ -1,15 +1,17 @@
+import { API_URLS } from '@/shared/constans/api-urls';
+
 export class AuthService {
   async auth(email: string, password: string, loginRole: string) {
-    let loginUserUrl: string | undefined;
+    let loginUserUrl: string = '';
 
     if (loginRole === 'user') {
-      loginUserUrl = process.env.API_LOGIN_USER_URL;
+      loginUserUrl = API_URLS.LOGIN_USER;
     } else if (loginRole === 'atendee') {
-      loginUserUrl = process.env.API_LOGIN_ATENDEE_URL;
+      loginUserUrl = API_URLS.LOGIN_ATENDEE;
     }
 
     try {
-      const response = await fetch(`${loginUserUrl}`, {
+      const response = await fetch(`${loginUserUrl.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,10 +32,10 @@ export class AuthService {
   }
 
   async readUserProfile(access_token: string) {
-    const readUserProfileUrl = process.env.API_USER_PROFILE_URL;
+    const readUserProfileUrl = API_URLS.USER_PROFILE;
 
     try {
-      const response = await fetch(`${readUserProfileUrl}`, {
+      const response = await fetch(`${readUserProfileUrl.toString()}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${access_token}`,
