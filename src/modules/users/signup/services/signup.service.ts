@@ -1,18 +1,19 @@
-import { API_URLS } from '@/shared/constans/api-urls';
-
 import { SignupData } from '../types/signup.types';
 
 export class SignupService {
   async signupAtendee(data: SignupData) {
-    const signupAtendeeUrl = API_URLS.SIGNUP_ATENDEE;
+    //const signupAtendeeUrl = API_URLS.SIGNUP_ATENDEE;
     try {
-      const response = await fetch(signupAtendeeUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'https://beeventos-be-production.up.railway.app/api/v1/atendees/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
         },
-        body: JSON.stringify(data),
-      });
+      );
 
       if (!response) {
         throw new Error('Erro ao tentar criar conta');
