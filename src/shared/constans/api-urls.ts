@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 //const baseUrl = 'http://localhost:3000/api/v1';
 const baseUrl = process.env.API_BASE_URL;
 
