@@ -39,7 +39,12 @@ const useEventEvaluationStore = create<EvaluationState>((set) => ({
       atendeeId,
       token,
     );
-    set({ result: result.result });
+
+    if (result) {
+      set({ result: result.result });
+    } else {
+      set({ result: initialAtendeeRegistrationsResult });
+    }
   },
 
   setEventEvaluations: async (eventId: string, token: string) => {

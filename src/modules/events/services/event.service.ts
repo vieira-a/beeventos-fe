@@ -2,7 +2,7 @@ import { EventFilterOptions } from '../types/filter-options.types';
 
 export class EventService {
   async readAvalibleEvents(filterOptions?: EventFilterOptions) {
-    let url = `https://beeventos-be-production.up.railway.app/api/events/avaliable`;
+    let url = `https://beeventos-be-production.up.railway.app/api/v1/events/avaliable`;
 
     if (filterOptions?.title) {
       url += `?title=${encodeURIComponent(filterOptions.title)}`;
@@ -10,7 +10,7 @@ export class EventService {
 
     try {
       const response = await fetch(
-        `https://beeventos-be-production.up.railway.app/api/events/avaliable`,
+        `https://beeventos-be-production.up.railway.app/api/v1/events/avaliable`,
         {
           method: 'GET',
           headers: {
@@ -35,7 +35,7 @@ export class EventService {
   }
 
   async readAllEvents(filterOptions?: EventFilterOptions) {
-    let url = 'https://beeventos-be-production.up.railway.app/api/events';
+    let url = 'https://beeventos-be-production.up.railway.app/api/v1/events';
 
     if (filterOptions?.title) {
       url += `?title=${encodeURIComponent(filterOptions.title)}`;
@@ -43,7 +43,7 @@ export class EventService {
 
     try {
       const response = await fetch(
-        'https://beeventos-be-production.up.railway.app/api/events',
+        'https://beeventos-be-production.up.railway.app/api/v1/events',
         {
           method: 'GET',
           headers: {
@@ -71,7 +71,7 @@ export class EventService {
     //let url = `${API_URLS.EVENTS}/${id}`;
     try {
       const response = await fetch(
-        `https://beeventos-be-production.up.railway.app/api/events/${id}`,
+        `https://beeventos-be-production.up.railway.app/api/v1/events/${id}`,
         {
           method: 'GET',
           headers: {
@@ -99,7 +99,7 @@ export class EventService {
     //let url = `${API_URLS.EVENTS_TYPES}`;
     try {
       const response = await fetch(
-        'https://beeventos-be-production.up.railway.app/api/events-types',
+        'https://beeventos-be-production.up.railway.app/api/v1/events-types',
         {
           method: 'GET',
           headers: {
@@ -109,11 +109,8 @@ export class EventService {
         },
       );
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
       const data = await response.json();
+      console.log(data);
 
       return data;
     } catch (error) {
