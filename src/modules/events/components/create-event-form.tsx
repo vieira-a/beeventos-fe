@@ -16,7 +16,7 @@ import useCreateEventStore from '../store/create-event.store';
 export function CreateEventForm() {
   useGetUserProfile();
   const { access_token, userId } = useSessionStore();
-  const { setEventTypes, eventTypes, setCreateEventResponse } = useCreateEventStore();
+  const { setEventTypes, eventTypes, setCreateEventResponse, closeCreateEventDialog } = useCreateEventStore();
 
   useEffect(() => {
     setEventTypes(access_token)
@@ -38,7 +38,11 @@ export function CreateEventForm() {
       message: await response.message,
       statusCode: await response.statusCode,
     })
-    }
+  }
+
+  const handleCloseCreateEventDialog = () => {
+    closeCreateEventDialog()
+  }
     
   return (
     <Form {...form}>
@@ -161,9 +165,14 @@ export function CreateEventForm() {
             </FormItem>
           )}
         />
-        <Button className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full">
-          Salvar
-        </Button>
+        <div className='flex gap-6'>
+          <Button onClick={handleCloseCreateEventDialog} className="bg-slate-200 hover:bg-yellow-500 text-slate-900 w-full">
+            Cancelar
+          </Button>
+          <Button className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 w-full">
+            Salvar
+          </Button>
+        </div>
       </form>
     </Form>
   );

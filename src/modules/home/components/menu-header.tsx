@@ -18,7 +18,7 @@ export const MenuHeader = () => {
   }
 
   return (
-    <header className="p-3 flex justify-between items-center">
+    <header className="px-3 py-4 flex justify-between items-center">
       <div>
         <Link to={'/'}><h4 className='font-bold text-slate-700'>beeventos</h4></Link>
       </div>

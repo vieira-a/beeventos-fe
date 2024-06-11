@@ -26,7 +26,11 @@ const useCreateEventStore = create<CreateEventState>((set) => ({
   setEventTypes: async (access_token: string) => {
     const eventService = new EventService();
     const data = await eventService.readEventsTypes(access_token);
-    set({ eventTypes: data });
+    if (data) {
+      set({ eventTypes: data });
+    } else {
+      set({ eventTypes: initialEventsTypesData });
+    }
   },
 
   clearCreateEventResponse: async () =>

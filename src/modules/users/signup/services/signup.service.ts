@@ -1,10 +1,12 @@
+import { API_URLS } from '@/shared/constans/api-urls';
+
 import { SignupData } from '../types/signup.types';
 
 export class SignupService {
   async signupAtendee(data: SignupData) {
-    const signupAtendeeUrl = process.env.API_SIGNUP_URL;
+    const signupAtendeeUrl = API_URLS.SIGNUP_ATENDEE;
     try {
-      const response = await fetch(`${signupAtendeeUrl}`, {
+      const response = await fetch(`${signupAtendeeUrl.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
